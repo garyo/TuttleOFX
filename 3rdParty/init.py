@@ -5,6 +5,8 @@ import os
 import sys
 import urllib
 import subprocess
+import tarfile
+import zipfile
 
 osname		= os.name.lower()
 sysplatform	= sys.platform.lower()
@@ -86,11 +88,33 @@ def getKnowExtensions( filename ):
 	return [f for f in knowExtensions.keys() if filename.endswith(f)]
 
 def uncompress(filename, ext, inNewDirectory, libname):
+	print 'uncompress', filename, ' @ ', ext, ' @ ', inNewDirectory, ' @ ', libname, '\n'
 	global knowExtensions
 	binOptions = {	'tar'	: {'directory':'--directory',},
 			'unzip'	: {'directory':'-d',},
 			}
 	cmdFromExtension = knowExtensions[ext]
+	if ext == 'tar.gz' :
+		tar = tarfile.open(filename, 'r:*')
+		folder = './'
+		tar.extractall(folder)
+
+
+	if ext == 'tar.bz2' :
+		tar = tarfile.open(filename, 'r:*')
+		folder = './'
+		tar.extractall(folder)
+
+	if ext == 'zip' :
+		zip = ZipFile.open(filename )
+		folder = './'
+		zip.extractall(folder)
+
+	if ext == 'exe':
+		os.startfile('filename.exe')
+
+
+
 	if not cmdFromExtension:
 		return
 	cmd = cmdFromExtension.split()
@@ -102,8 +126,8 @@ def uncompress(filename, ext, inNewDirectory, libname):
 	print '\n', ' '.join(cmd)
 	if not os.path.exists( os.path.join( os.getcwd(), libname)):
 		os.mkdir(os.path.join( os.getcwd() ,libname))
-	p = subprocess.Popen(cmd).communicate()
-	print 'uncompress and  copy', filename[:-len(ext)-1], libname, '\n'
+	# p = subprocess.Popen(cmd).communicate()
+	# print 'uncompress and  copy', filename[:-len(ext)-1], libname, '\n'
 	copytree(filename[:-len(ext)-1], libname)
 	print 'end of uncompress\n'
 
