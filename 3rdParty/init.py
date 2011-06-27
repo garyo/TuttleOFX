@@ -5,8 +5,6 @@ import os
 import sys
 import urllib
 import subprocess
-import tarfile
-import zipfile
 
 osname		= os.name.lower()
 sysplatform	= sys.platform.lower()
@@ -88,33 +86,11 @@ def getKnowExtensions( filename ):
 	return [f for f in knowExtensions.keys() if filename.endswith(f)]
 
 def uncompress(filename, ext, inNewDirectory, libname):
-	print 'uncompress', filename, ' @ ', ext, ' @ ', inNewDirectory, ' @ ', libname, '\n'
 	global knowExtensions
 	binOptions = {	'tar'	: {'directory':'--directory',},
 			'unzip'	: {'directory':'-d',},
 			}
 	cmdFromExtension = knowExtensions[ext]
-	if ext == 'tar.gz' :
-		tar = tarfile.open(filename, 'r:*')
-		folder = './'
-		tar.extractall(folder)
-
-
-	if ext == 'tar.bz2' :
-		tar = tarfile.open(filename, 'r:*')
-		folder = './'
-		tar.extractall(folder)
-
-	if ext == 'zip' :
-		zip = ZipFile.open(filename )
-		folder = './'
-		zip.extractall(folder)
-
-	if ext == 'exe':
-		os.startfile('filename.exe')
-
-
-
 	if not cmdFromExtension:
 		return
 	cmd = cmdFromExtension.split()
@@ -126,13 +102,12 @@ def uncompress(filename, ext, inNewDirectory, libname):
 	print '\n', ' '.join(cmd)
 	if not os.path.exists( os.path.join( os.getcwd(), libname)):
 		os.mkdir(os.path.join( os.getcwd() ,libname))
-	# p = subprocess.Popen(cmd).communicate()
-	# print 'uncompress and  copy', filename[:-len(ext)-1], libname, '\n'
+	p = subprocess.Popen(cmd).communicate()
+	print 'uncompress and  copy', filename[:-len(ext)-1], libname, '\n'
 	copytree(filename[:-len(ext)-1], libname)
 	print 'end of uncompress\n'
 
 def getAndUncompress( libraries ):
-	
 	for libname, url, inNewDirectory in libraries:
 		print '_'*80
 		print '--', libname
@@ -182,6 +157,28 @@ allLibs = [
 		('gvc','http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.26.3.tar.gz',False)
 	]
 
+
+def insertInFile( filename, linesIndexes, textToAppend ):
+	file = open( filename , 'r' )
+	fileTmp = open( 'tmp.txt' , 'w' )
+	lines = file.readlines()
+
+	nlist = list( lines )
+
+	index = 0;
+
+	for lineIndex in linesIndexes:
+		nlist.insert( lineIndex , textToAppend[index]+'\n' )
+		index+=1
+	fileTmp.writelines( nlist )
+
+	file.close()
+	fileTmp.close()
+	#os.remove(filename)
+	os.rename('tmp.txt', filename)
+	#os.remove('tmp.txt')
+
+
 if len( sys.argv ) == 1:
 	getAndUncompress( allLibs )
 else:
@@ -191,3 +188,17 @@ else:
 	
 	for libname in sys.argv[1:]:
 		getAndUncompress( [libDic[libname]] )
+
+print '_'*80
+print '-'*29 + ' Files modifications  ' + '-'*29
+
+print "ctl/IlmCtl/CtlLex.cpp"
+insertInFile("ctl/IlmCtl/CtlLex.cpp", (1, 63) , ("", "#include <cstdlib>" ) )
+print "ctl/IlmCtlSimd/CtlSimdReg.cpp"
+insertInFile("ctl/IlmCtlSimd/CtlSimdReg.cpp", (1, 58) , ( "", "#include <cstring>" ) )
+
+print 'End of initialisation.'
+
+
+
+
