@@ -60,9 +60,9 @@ public:
 	VIEW_T getGilView();
 
 public:
-	#ifndef TUTTLE_PRODUCTION
+	/*#ifndef TUTTLE_PRODUCTION
 	void debugSaveAsPng( const std::string& filename );
-	#endif
+	#endif*/
 
 private:
 	template < class S_VIEW >

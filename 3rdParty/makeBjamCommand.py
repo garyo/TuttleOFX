@@ -8,6 +8,7 @@ import urllib
 import subprocess
 
 fileExec = "../bjam.sh"
+fileExecWindows = "../bjam.bat"
 
 def detectCPUs():
  """
@@ -52,6 +53,22 @@ if linux :
     f.close()
     os.chmod(fileExec,stat.S_IXUSR+stat.S_IRUSR+stat.S_IWUSR)
 
+
+if windows :
+  if os.path.exists(fileExecWindows)==False :
+    f = open(fileExecWindows, "w")
+    f.write("@echo off \n")
+    f.write("set BOOST_BUILD_PATH=%cd%\\3rdParty\\boost\\tools\\build\\v2 \n")
+    f.write("set BOOST_PATH=%cd%\\3rdParty\\boost \n")
+    f.write("set BOOST_ROOT=%cd%\\3rdParty\\boost\\boost \n")
+    f.write("@echo on \n")
+    f.write("3rdParty\\boost\\bjam --toolset=msvc --disable-icu ")
+    if is_64bits :
+      f.write("address-model=64 ")
+    f.write("-j%s " % detectCPUs())
+    f.write("%* " )
+    f.close()
+    os.chmod( fileExecWindows, stat.S_IXUSR + stat.S_IRUSR + stat.S_IWUSR )
 
 print "linux\t\t%s" % (linux)
 print "windows\t\t%s" % (windows)

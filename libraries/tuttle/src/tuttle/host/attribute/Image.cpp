@@ -7,10 +7,10 @@
 #include <boost/gil/image.hpp>
 #include <boost/gil/image_view.hpp>
 #include <boost/gil/typedefs.hpp>
-
+/*
 #ifndef TUTTLE_PRODUCTION
  #include <boost/gil/extension/io/png_io.hpp>
-#endif
+#endif*/
 
 namespace tuttle {
 namespace host {
@@ -127,7 +127,7 @@ void Image::copy( D_VIEW& dst, S_VIEW& src, const OfxPointI& dstCorner,
 	}
 }
 
-#ifndef TUTTLE_PRODUCTION
+/*#ifndef TUTTLE_PRODUCTION
 void Image::debugSaveAsPng( const std::string& filename )
 {
 	using namespace boost::gil;
@@ -188,7 +188,7 @@ void Image::debugSaveAsPng( const std::string& filename )
 	}
 }
 
-#endif
+#endif*/
 
 /// Copy from gil image view to Image
 template < class S_VIEW >
