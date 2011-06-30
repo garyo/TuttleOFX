@@ -8,6 +8,7 @@ lib tuttlecommon :
 		[ glob-tree *.cpp ]
 #		/openfxHackProject/<link>static
 		/ofxPluginSupport/<link>static # ???? but it work
+		/boost/filesystem
 		/boost/system
-		/boost/regex
+		/boost/regex/<link>static
 		;

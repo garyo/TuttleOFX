@@ -46,7 +46,6 @@ exe sam-info :
 	[ glob src/*.cpp ]
 	/tuttlecommon/<link>static
 	/boost/system
-	/boost/filesystem
 	/boost/serialization
 	/boost/program_options
 	# $(3RD_PARTY)/ImageMagick//Magick++/<link>static

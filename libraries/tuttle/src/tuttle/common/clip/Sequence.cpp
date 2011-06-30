@@ -752,7 +752,7 @@ bool isNotFilter( std::string filename, std::vector<std::string>& filters)
 	if(filters.size()==0)
 		return true;
 	
-	for(uint i=0; i<filters.size(); i++)
+	for(unsigned int i=0; i<filters.size(); i++)
 	{
 		std::string filter(filters.at(i));
 		filter = boost::regex_replace( filter, boost::regex( "\\*" ), "(.*)"  );

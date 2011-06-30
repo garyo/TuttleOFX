@@ -21,7 +21,6 @@ exe sam-rm :
 	[ glob src/*.cpp ]
 	/tuttlecommon/<link>static
 	/boost/system
-	/boost/filesystem
 	/boost/serialization
 	/boost/program_options
 	:

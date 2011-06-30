@@ -23,7 +23,6 @@ exe sam-mv :
 	[ glob ../sam-cp/src/*.cpp ]
 	/tuttlecommon/<link>static
 	/boost/system
-	/boost/filesystem
 	/boost/serialization
 	/boost/program_options
 	:

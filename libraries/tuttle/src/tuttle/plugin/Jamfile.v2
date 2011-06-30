@@ -2,8 +2,14 @@
 ## Main BJam makefile for Tuttle library
 ###############################################################################
 
+
 lib tuttleplugin :
     [ glob-tree *.cpp ]
     /ofxPluginSupport/<link>static
     /tuttlecommon/<link>static
+    
+    :
+    
+	<os>NT:<find-shared-library>opengl32
+	<os>MACOSX:<linkflags>"-framework OpenGL"
     ;
