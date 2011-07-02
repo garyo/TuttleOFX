@@ -1,0 +1,37 @@
+###############################################################################
+## Main BJam makefile for libliquidrescale library
+###############################################################################
+
+###############################################################################
+# Global project requirements
+###############################################################################
+project
+	: requirements	
+		<include>.
+                <include>lqr
+                <include>/usr/include/glib-2.0/
+                <include>/usr/lib64/glib-2.0/include/
+		# disabling warning as error as we are not responsible for this code
+		<warnings-as-errors>off
+		<warnings>off
+	: usage-requirements
+		<include>.
+                <include>lqr
+                <include>/usr/include/glib-2.0/
+                <include>/usr/lib64/glib-2.0/include/
+        : build-dir $(DIST)/3rdParty/liquidrescale/obj
+    ;
+
+###############################################################################
+# libliquidrescale library
+###############################################################################
+alias	headers		: [ glob-tree *.h ] ;
+
+lib	liquidrescale		:
+                          [ glob lqr/*.c ]
+			;
+
+install	dist_src	: liquidrescale
+                        : <variant>debug:<location>$(DIST)/3rdParty/liquidrescale/bin/debug
+                          <variant>release:<location>$(DIST)/3rdParty/liquidrescale/bin/release
+			;

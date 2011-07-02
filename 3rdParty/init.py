@@ -89,11 +89,6 @@ def getKnowExtensions( filename ):
 	return [f for f in knowExtensions.keys() if filename.endswith(f)]
 
 def uncompress(filename, ext, inNewDirectory, libname):
-	global knowExtensions
-	binOptions = {	'tar'	: {'directory':'--directory',},
-			'unzip'	: {'directory':'-d',},
-			}
-	cmdFromExtension = knowExtensions[ext]
 	
 	if ext == 'tar.gz' :
 		tar = tarfile.open(filename, 'r:*')
@@ -104,9 +99,12 @@ def uncompress(filename, ext, inNewDirectory, libname):
 		tar = tarfile.open(filename, 'r:*')
 		folder = './'
 		tar.extractall( folder )
-		
+        if ext == 'tar.bz2' :
+                        tar = tarfile.open(filename, 'r:*')
+                        folder = './'
+                        tar.extractall( folder )
 	if ext == 'zip' :
-		zip = ZipFile.open( filename )
+                zip = zipfile.ZipFile( filename, 'r' )
 		folder = './'
 		zip.extractall( folder )
 		
@@ -114,15 +112,6 @@ def uncompress(filename, ext, inNewDirectory, libname):
 		fileToRun = filename+'.exe'
 		os.startfile( fileToRun )
 	
-	if not cmdFromExtension:
-		return
-	cmd = cmdFromExtension.split()
-	bin = cmd[0]
-	if( inNewDirectory ):
-		cmd.append( binOptions[bin]['directory'] )
-		cmd.append( libname )
-	cmd.append(filename)
-	print '\n', ' '.join(cmd)
 	if not os.path.exists( os.path.join( os.getcwd(), libname)):
 		os.mkdir(os.path.join( os.getcwd() ,libname))
 	#p = subprocess.Popen(cmd).communicate()
@@ -165,6 +154,7 @@ allLibs = [
 		('ilmbase', 'http://download.savannah.nongnu.org/releases/openexr/ilmbase-1.0.1.tar.gz', False),
 		('openexr', 'http://download.savannah.nongnu.org/releases/openexr/openexr-1.6.1.tar.gz', False),
 		('ctl', 'http://sourceforge.net/projects/ampasctl/files/ctl/ctl-1.4.1/ctl-1.4.1.tar.gz/download', False),
+                ('ctl', 'http://sourceforge.net/projects/ampasctl/files/ctl/ctl-1.4.1/ctl-1.4.1.tar.gz/download', False),
 		('boost', 'http://prdownloads.sourceforge.net/boost/boost_1_46_0.tar.bz2', False) if not windows else ('boost', 'http://sourceforge.net/projects/boost/files/boost/1.46.1/boost_1_46_1.zip', False),
 		('freetype','http://prdownloads.sourceforge.net/freetype/freetype-2.4.3.tar.gz', False) if not windows else ('freetype','http://prdownloads.sourceforge.net/freetype/freetype-2.4.3.tar.gz', False),
 		('libraw','http://www.libraw.org/data/LibRaw-0.13.1.tar.gz', False) if not windows else ('libraw', 'http://www.libraw.org/data/LibRaw-0.13.5.zip', False),
@@ -177,7 +167,8 @@ allLibs = [
 		('libxml','ftp://xmlsoft.org/libxml2/libxml2-2.7.8.tar.gz',False) if not windows else ('libxml','ftp://xmlsoft.org/libxml2/win32/libxml2-2.7.7.win32.zip',False),
 		('jasper','http://www.ece.uvic.ca/~mdadams/jasper/software/jasper-1.900.1.zip',False),
 		('xz','http://tukaani.org/xz/xz-5.0.2.tar.gz', False),
-		('gvc','http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.26.3.tar.gz',False)
+                ('gvc','http://www.graphviz.org/pub/graphviz/stable/SOURCES/graphviz-2.26.3.tar.gz',False),
+                ('libliquidrescale', 'http://liblqr.wikidot.com/local--files/en:download-page/liblqr-1-0.4.1.tar.bz2', False)
 	]
 
 
