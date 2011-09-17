@@ -1,0 +1,345 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\noun on
+TuttleOFX - Plugin development
+\end_layout
+
+\begin_layout Part
+Creation
+\end_layout
+
+\begin_layout Standard
+To create a new plugin, you can use the python script: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+./plugin/_script/newPlugin.py
+\end_layout
+
+\end_inset
+
+ This script asks you all needed informations.
+ The only mandatory information is the name of your plugin.
+\end_layout
+
+\begin_layout Standard
+Then if the plugin is inside the "$TuttleOFX/plugin" directory, you can
+ build it: 
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+scons YourPluginName
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Your plugin is now there "$TuttleOFX/dist/$hostname/$compiler/$compilationmode/b
+in".
+ To load it in your prefered OpenFX host, add this directory into the environmen
+t variable "OFX_PLUGIN_PATH".
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+export OFX_PLUGIN_PATH=/home/foo/dev/TuttleOFX/dist/foo-laptop/gcc-4.5.2/productio
+n/bin
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Plugin organization
+\end_layout
+
+\begin_layout Standard
+Each plugin is splitted into at least 3 parts: description, instance and
+ process.
+\end_layout
+
+\begin_layout Section
+PluginFactory
+\end_layout
+
+\begin_layout Standard
+This part is the description of the plugin.
+ It's called factory because the host use it to build plugin instances.
+\end_layout
+
+\begin_layout Standard
+Based on these information, the host know if it can support the plugin,
+ it can add the plugin in the correct menu, propose help about this plugin,
+ etc.
+\end_layout
+
+\begin_layout Subsection
+describe
+\end_layout
+
+\begin_layout Standard
+First you describe the abstract part of the plugin: name, help, contexts,
+ supported image clips (bitdepth, components), thread safety, tiles support,
+ etc.
+\end_layout
+
+\begin_layout Standard
+The plugin can check if the host supports some OpenFX extensions.
+ If it's not the case, you can throw an error to inform the host that you
+ can't support work or propose an alternative solution without this extension.
+\end_layout
+
+\begin_layout Standard
+Depending on plugin information, the host checks from it's side if it can
+ supports this plugin or not.
+\end_layout
+
+\begin_layout Subsection
+describeInContext
+\end_layout
+
+\begin_layout Standard
+Now you are on a particular context, so you can declare yourself in details:
+ input/output clips and parameters with all there properties.
+\end_layout
+
+\begin_layout Section
+Plugin
+\end_layout
+
+\begin_layout Standard
+This class represents an instance of your plugin in your host application.
+\end_layout
+
+\begin_layout Standard
+In this class, you need to fetch all your attributes (clips and parameters).
+ The host creates your plugin node with the properties and all the attributes
+ you have declared in PluginFactory.
+ So to use them, you have to fetch them from the host.
+\end_layout
+
+\begin_layout Standard
+Then you can implement the functions you need: 
+\begin_inset Quotes eld
+\end_inset
+
+render
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+clipChanged
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+paramChanged
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+isIdentity
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+getTimeDomain
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+getRegionOfDefinition
+\begin_inset Quotes erd
+\end_inset
+
+, 
+\begin_inset Quotes eld
+\end_inset
+
+getRegionOfInterest
+\begin_inset Quotes erd
+\end_inset
+
+, etc.
+ The only mandatory function is 
+\begin_inset Quotes eld
+\end_inset
+
+render
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Section
+Process
+\end_layout
+
+\begin_layout Standard
+This class is instanced only during the rendering.
+\end_layout
+
+\begin_layout Standard
+This class contains a function: 
+\begin_inset Quotes eld
+\end_inset
+
+multithreadProcessImage
+\begin_inset Quotes erd
+\end_inset
+
+, which is called multiple times on the same buffer with a different region
+ to render.
+ If you can't support multithreading, call the function setNoMultithreading()
+ in the constructor.
+\end_layout
+
+\begin_layout Standard
+Thead safety:
+\end_layout
+
+\begin_layout Itemize
+If you declare your plugin 
+\begin_inset Quotes eld
+\end_inset
+
+fully safe
+\begin_inset Quotes erd
+\end_inset
+
+, the host can launch multiple rendering in parallel.
+ This will result as multiple instances of process.
+\end_layout
+
+\begin_layout Itemize
+If you declare your plugin 
+\begin_inset Quotes eld
+\end_inset
+
+instance safe
+\begin_inset Quotes erd
+\end_inset
+
+, any instance can have a single 'render' call at any one time.
+ Inside this render call, the plugin itself can use multiple threads.
+\end_layout
+
+\begin_layout Itemize
+If you declare your plugin 
+\begin_inset Quotes eld
+\end_inset
+
+unsafe
+\begin_inset Quotes erd
+\end_inset
+
+, only a single 'render' call can be made at any time amoung all instances.
+\end_layout
+
+\begin_layout Section
+PluginOverlay
+\end_layout
+
+\begin_layout Standard
+In some cases, you want to draw some overlays on the host viewer.
+\end_layout
+
+\begin_layout Standard
+You only have to create a PluginOverlay class derived from OverlayInteract
+ and declare it in the describe function of the PluginFactory.
+ Then, you can implent the needed functions: draw, penDown, penUp, mouseMove,
+ etc.
+\end_layout
+
+\end_body
+\end_document
