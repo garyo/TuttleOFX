@@ -45,7 +45,7 @@ void printImageProperties( std::string path )
 		// Read a file into image object
 		image_info = AcquireImageInfo();
 		GetImageInfo( image_info );
-
+		TUTTLE_COUT(path.c_str());
 		strcpy( image_info -> filename, path.c_str() ); 
 
 		ExceptionInfo* exceptionsInfo = AcquireExceptionInfo();

@@ -51,7 +51,19 @@ Input/Output
 \end_layout
 
 \begin_layout Itemize
-single RGB(A) input and output
+
+\noun on
+Input
+\noun default
+: single RGB(A)
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Output
+\noun default
+: single RGB(A)
 \end_layout
 
 \begin_layout Subsection

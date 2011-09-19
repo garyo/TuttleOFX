@@ -56,7 +56,58 @@
 \begin_layout Title
 
 \noun on
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+width "10col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\noun on
+\begin_inset Graphics
+	filename ../ressources/images/tuttle.png
+	lyxscale 20
+	width 100text%
+
+\end_inset
+
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset Box Frameless
+position "c"
+hor_pos "c"
+has_inner_box 1
+inner_pos "c"
+use_parbox 0
+width "30col%"
+special "none"
+height "1in"
+height_special "totalheight"
+status open
+
+\begin_layout Plain Layout
+
+\noun on
+\begin_inset Formula $\quad$
+\end_inset
+
 TuttleOFX
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Author
@@ -108,26 +159,33 @@ TuttleOFX
 \end_layout
 
 \begin_layout Standard
+\begin_inset CommandInset include
+LatexCommand include
+filename "../../plugins/image/process/color/Colorspace/doc/colorspace.lyx"
+
+\end_inset
+
 
 \begin_inset CommandInset include
 LatexCommand include
-filename "plugins/image/process/color/Colorspace/doc/colorspace.lyx"
+filename "../../plugins/image/process/color/CTL/doc/ctl.lyx"
+
 \end_inset
+
 
 \begin_inset CommandInset include
 LatexCommand include
-filename "plugins/image/process/color/CTL/doc/ctl.lyx"
+filename "../../plugins/image/process/geometry/LensDistort/doc/lensdistort.lyx"
+
 \end_inset
+
 
 \begin_inset CommandInset include
 LatexCommand include
-filename "plugins/image/process/geometry/LensDistort/doc/lensdistort.lyx"
+filename "../../plugins/image/process/geometry/Resize/doc/resize.lyx"
+
 \end_inset
 
-\begin_inset CommandInset include
-LatexCommand include
-filename "plugins/image/process/geometry/Resize/doc/resize.lyx"
-\end_inset
 
 \end_layout
 

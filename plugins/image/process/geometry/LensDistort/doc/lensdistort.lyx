@@ -20,12 +20,16 @@
 \spacing single
 \use_hyperref false
 \papersize default
-\use_geometry false
+\use_geometry true
 \use_amsmath 1
 \use_esint 1
 \cite_engine basic
 \use_bibtopic false
 \paperorientation portrait
+\leftmargin 2cm
+\topmargin 1.5cm
+\rightmargin 2cm
+\bottommargin 1.5cm
 \secnumdepth 3
 \tocdepth 3
 \paragraph_separation indent
@@ -51,7 +55,19 @@ Input/Output
 \end_layout
 
 \begin_layout Itemize
-single RGB(A) input and output
+
+\noun on
+Input
+\noun default
+: single RGB(A)
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Output
+\noun default
+: single RGB(A)
 \end_layout
 
 \begin_layout Subsection
@@ -64,13 +80,380 @@ Lens distortion parameters
 
 \begin_deeper
 \begin_layout Itemize
-focal length
+
+\family typewriter
+asymetric
 \end_layout
 
 \begin_layout Itemize
-...
+
+\family typewriter
+center
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+centerType
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+choice
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+RoW
 \end_layout
 
 \end_deeper
+\begin_layout Itemize
+
+\family typewriter
+coef1
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+debugDisplayRoi
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+displaySource
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+gridCenter
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+gridCenterOverlay
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+gridScale
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+interpolation
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+nearestNeighbor
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+bilinear
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+bicubic
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+catmul
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+mitchell
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+parzen
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+keys
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+simon
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+rifman
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+lensCenterOverlay
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+lensType
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+standard
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+fish-eye
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+advanced
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+postScale
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+preScale
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+resizeRod
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+no
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+sourceRef
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+min
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+max
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+manual
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+reverse
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+scaleRod
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+squeeze
+\end_layout
+
+\end_deeper
+\begin_layout Subsection
+Examples of LensDistort
+\end_layout
+
+\begin_layout Standard
+\begin_inset Float figure
+placement h
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lensDistort.png
+	width 30text%
+
+\end_inset
+
+
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lensDistort1.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\begin_inset space \hfill{}
+\end_inset
+
+
+\begin_inset Float figure
+wide false
+sideways false
+status open
+
+\begin_layout Plain Layout
+\align center
+\begin_inset Graphics
+	filename lensDistort2.png
+	width 30text%
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+\begin_inset Caption
+
+\begin_layout Plain Layout
+(a) Image Source; (b) with coef =1; (c) with coef =-1
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
 \end_body
 \end_document
