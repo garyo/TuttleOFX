@@ -51,7 +51,19 @@ Input/Output
 \end_layout
 
 \begin_layout Itemize
-single RGB(A) input and output
+
+\noun on
+Input
+\noun default
+: single RGB(A)
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Output
+\noun default
+: single RGB(A)
 \end_layout
 
 \begin_layout Subsection
@@ -59,7 +71,49 @@ Parameters
 \end_layout
 
 \begin_layout Itemize
-Filter
+Resize parameters
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+b
+\family default
+: B is the parameter of the BC-filter.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+c
+\family default
+: C is the parameter of the BC-filter.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+center
+\family default
+: Enable the resizing around the center point (specified with the centerPoint
+ parameter).
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+centerPoint
+\family default
+: point of the center of resize.
+\end_layout
+
+\begin_layout Itemize
+
+\family typewriter
+filter
+\family default
+: method to apply resizing (show example section)
 \end_layout
 
 \begin_deeper
@@ -68,12 +122,16 @@ Filter
 status open
 
 \begin_layout Plain Layout
-Nearest Neighbor
+nearestNeighbor
 \end_layout
 
 \end_inset
 
-Nearest Neighbor
+
+\family typewriter
+nearestNeighbor
+\family default
+:
 \end_layout
 
 \begin_layout Itemize
@@ -81,12 +139,14 @@ Nearest Neighbor
 status open
 
 \begin_layout Plain Layout
-Bilinear
+bilinear
 \end_layout
 
 \end_inset
 
-Bilinear
+
+\family typewriter
+bilinear
 \end_layout
 
 \begin_layout Itemize
@@ -94,12 +154,14 @@ Bilinear
 status open
 
 \begin_layout Plain Layout
-Bicubic
+bicubic
 \end_layout
 
 \end_inset
 
-Bicubic
+
+\family typewriter
+bicubic
 \end_layout
 
 \begin_layout Itemize
@@ -107,12 +169,16 @@ Bicubic
 status open
 
 \begin_layout Plain Layout
-B-C sampler
+bc
 \end_layout
 
 \end_inset
 
-B-C sampler (with parametrable factors B and C)
+
+\family typewriter
+bc
+\family default
+: B and C parameters can be setted.
 \end_layout
 
 \begin_layout Itemize
@@ -120,12 +186,14 @@ B-C sampler (with parametrable factors B and C)
 status open
 
 \begin_layout Plain Layout
-Keys
+keys
 \end_layout
 
 \end_inset
 
-Keys
+
+\family typewriter
+keys
 \end_layout
 
 \begin_layout Itemize
@@ -133,12 +201,14 @@ Keys
 status open
 
 \begin_layout Plain Layout
-Simon
+simon
 \end_layout
 
 \end_inset
 
-Simon
+
+\family typewriter
+simon
 \end_layout
 
 \begin_layout Itemize
@@ -146,12 +216,14 @@ Simon
 status open
 
 \begin_layout Plain Layout
-Rifman
+rifman
 \end_layout
 
 \end_inset
 
-Rifman
+
+\family typewriter
+rifman
 \end_layout
 
 \begin_layout Itemize
@@ -159,12 +231,16 @@ Rifman
 status open
 
 \begin_layout Plain Layout
-Catmul-Rom
+catrom
 \end_layout
 
 \end_inset
 
-Catmul-Rom
+
+\family typewriter
+catrom
+\family default
+: is the Catmul-Rom filter, is similar to the Keys filter.
 \end_layout
 
 \begin_layout Itemize
@@ -172,12 +248,14 @@ Catmul-Rom
 status open
 
 \begin_layout Plain Layout
-Gaussian
+gaussian
 \end_layout
 
 \end_inset
 
-Gaussian
+
+\family typewriter
+gaussian
 \end_layout
 
 \begin_layout Itemize
@@ -185,12 +263,14 @@ Gaussian
 status open
 
 \begin_layout Plain Layout
-Bessel
+bessel
 \end_layout
 
 \end_inset
 
-Bessel
+
+\family typewriter
+bessel
 \end_layout
 
 \begin_layout Itemize
@@ -198,18 +278,72 @@ Bessel
 status open
 
 \begin_layout Plain Layout
-Lanczos
+lanczos
 \end_layout
 
 \end_inset
 
-Lanczos
+
+\family typewriter
+lanczos
+\family default
+: size of window can be setted.
+\end_layout
+
+\end_deeper
+\begin_layout Itemize
+
+\family typewriter
+options
+\family default
+:
+\end_layout
+
+\begin_deeper
+\begin_layout Itemize
+
+\family typewriter
+toFomat
+\family default
+: select one format from 
+\family typewriter
+toFormat
+\family default
+ parameter
 \end_layout
 
 \begin_layout Itemize
-.........
+
+\family typewriter
+toBox
+\family default
+: set the size of the output with the parameter 
+\family typewriter
+outputDimension
+\family default
+ for 1 dimension (aspect ratio is keeped) or 
+\family typewriter
+outputFormat
+\family default
+ to specify 2 dimensions of the output box 
 \end_layout
 
+\begin_layout Itemize
+
+\family typewriter
+toScale
+\family default
+: apply a scale factor (or separated factor on width and height) with parameter(
+s) 
+\family typewriter
+scaleX
+\family default
+, 
+\family typewriter
+scaleY
+\end_layout
+
+\end_deeper
 \end_deeper
 \end_body
 \end_document

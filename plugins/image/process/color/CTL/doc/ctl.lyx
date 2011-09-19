@@ -18,7 +18,18 @@
 \graphics default
 \paperfontsize default
 \spacing single
-\use_hyperref false
+\use_hyperref true
+\pdf_title "TuttleOFX -CTL"
+\pdf_author "TuttleOFX-team"
+\pdf_bookmarks true
+\pdf_bookmarksnumbered false
+\pdf_bookmarksopen false
+\pdf_bookmarksopenlevel 1
+\pdf_breaklinks false
+\pdf_pdfborder true
+\pdf_colorlinks false
+\pdf_backref false
+\pdf_pdfusetitle true
 \papersize default
 \use_geometry false
 \use_amsmath 1
@@ -51,15 +62,168 @@ Input/Output
 \end_layout
 
 \begin_layout Itemize
-single RGB(A) input and output
+
+\noun on
+Input
+\noun default
+: single RGB(A)
+\end_layout
+
+\begin_layout Itemize
+
+\noun on
+Output
+\noun default
+: single RGB(A)
 \end_layout
 
 \begin_layout Subsection
 Parameters
 \end_layout
 
-\begin_layout Itemize
-File with CTL language code
+\begin_layout Standard
+File with CTL language code (nota: the code editor is not enabled).
+\end_layout
+
+\begin_layout Standard
+A simple CTL file is presented here, for more details, you can refers here:
+ 
+\begin_inset Flex URL
+status open
+
+\begin_layout Plain Layout
+
+http://ampasctl.sourceforge.net/
+\end_layout
+
+\end_inset
+
+ and the full documentation is here: 
+\begin_inset Flex URL
+status collapsed
+
+\begin_layout Plain Layout
+
+http://ampasctl.sourceforge.net/CtlManual.pdf
+\end_layout
+
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+lstparams "basicstyle={\ttfamily},language={C++}"
+inline false
+status open
+
+\begin_layout Plain Layout
+
+void main
+\end_layout
+
+\begin_layout Plain Layout
+
+(
+\end_layout
+
+\begin_layout Plain Layout
+
+	input varying float rIn,
+\end_layout
+
+\begin_layout Plain Layout
+
+	input varying float gIn,
+\end_layout
+
+\begin_layout Plain Layout
+
+	input varying float bIn,
+\end_layout
+
+\begin_layout Plain Layout
+
+	input varying float aIn,
+\end_layout
+
+\begin_layout Plain Layout
+
+	output varying float rOut,
+\end_layout
+
+\begin_layout Plain Layout
+
+	output varying float gOut,
+\end_layout
+
+\begin_layout Plain Layout
+
+	output varying float bOut,
+\end_layout
+
+\begin_layout Plain Layout
+
+	output varying float aOut)
+\end_layout
+
+\begin_layout Plain Layout
+
+{
+\end_layout
+
+\begin_layout Plain Layout
+
+	float Rraw = rIn * 1.4;
+\end_layout
+
+\begin_layout Plain Layout
+
+	float Graw = gIn * 1.0;
+\end_layout
+
+\begin_layout Plain Layout
+
+	float Braw = bIn * 2.2;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	rOut = 0.8 * Rraw + -0.1 * Graw + 0.2 * Braw;
+\end_layout
+
+\begin_layout Plain Layout
+
+	gOut = -0.01 * Graw + 1.12 * Graw + -0.16 * Braw;
+\end_layout
+
+\begin_layout Plain Layout
+
+	bOut = 0.009 * Rraw + -0.4* Graw + 1.47 * Braw;
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+	aOut = aIn;
+\end_layout
+
+\begin_layout Plain Layout
+
+} 
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \end_body
