@@ -34,12 +34,16 @@ Compilation
 		see INSTALL.bjam or INSTALL.scons file
 
 
-Plugin creation
+Documentation
 
-	There is a script to help you making new plugins.
-		python $TUTTLE_ROOT/plugins/_scripts/newPlugin.py
-	This script asks you informations about your plugin and create
-	a new plugin source tree in your current directory.
+	The documentation need to be generated. All sources used for documentation is in the directory "$TuttleOFX/doc" and each plugin contains it's own documentation.
+	The documentation is divided into 3 parts:
+	 * user: user documentation explains the project and the details of tools and plugins.
+		scons doc_user
+	 * dev: developper documentation, to use tuttle as an image library, to write new plugins or participate to the project.
+		scons doc_dev
+	 * code: source code documentation, generated using doxygen.
+		scons doc_code
 
 
 Tested compilers
@@ -47,7 +51,7 @@ Tested compilers
 	* Linux
 		+ GCC 4.1.2 on OpenSUSE 11.2
 		+ GCC 4.4.1 on OpenSUSE 11.2
-		+ GCC 4.4.5 on Ubuntu 10.10
+		+ GCC 4.5.2 on Ubuntu 11.04
 	* MacOS
 		+ GCC 4.2.1
 	* Windows

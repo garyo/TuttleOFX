@@ -1,0 +1,114 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\noun on
+Terry - GIL
+\end_layout
+
+\begin_layout Part
+Presentation
+\end_layout
+
+\begin_layout Standard
+Terry is a processing image library.
+ It's an extension to boost GIL library.
+ It's a fully templated library, so it's header only and you don't need
+ any link.
+ Terry is a completly autonomous part of the TuttleOFX project.
+ The only reasons to not released Terry independantly are:
+\end_layout
+
+\begin_layout Itemize
+Many plugins are strongly dependant to it.
+\end_layout
+
+\begin_layout Itemize
+The developpement of a plugin and it's algorithmic part in terry is done
+ together.
+\end_layout
+
+\begin_layout Part
+GIL
+\end_layout
+
+\begin_layout Standard
+GIL is a well-known image library written by Adobe and intergrated into
+ boost.
+ It's an image manipulation library, which helps developpers to write there
+ algorithm properly.
+ But the goal of GIL is not to propose itself processing algorithm.
+\end_layout
+
+\begin_layout Part
+Terry
+\end_layout
+
+\begin_layout Standard
+The goal of Terry is to implement a set of processing algorithm based on
+ GIL.
+ Our first works are to implement low level thinks, like sampling and colorspace
+ transformations.
+\end_layout
+
+\end_body
+\end_document

@@ -82,7 +82,8 @@ status open
 
 \end_inset
 
- This script asks you all needed informations.
+This script asks you all needed informations and create a new plugin source
+ tree.
  The only mandatory information is the name of your plugin.
 \end_layout
 
