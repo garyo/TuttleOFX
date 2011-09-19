@@ -66,13 +66,14 @@ width "10col%"
 special "none"
 height "1in"
 height_special "totalheight"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
 \noun on
 \begin_inset Graphics
 	filename ../ressources/images/tuttle.png
+	lyxscale 20
 	width 100text%
 
 \end_inset
@@ -93,7 +94,7 @@ width "30col%"
 special "none"
 height "1in"
 height_special "totalheight"
-status collapsed
+status open
 
 \begin_layout Plain Layout
 
