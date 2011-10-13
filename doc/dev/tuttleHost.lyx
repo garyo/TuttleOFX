@@ -1,0 +1,434 @@
+#LyX 2.0 created this file. For more info see http://www.lyx.org/
+\lyxformat 413
+\begin_document
+\begin_header
+\textclass article
+\use_default_options true
+\maintain_unincluded_children false
+\language english
+\language_package default
+\inputencoding auto
+\fontencoding global
+\font_roman default
+\font_sans default
+\font_typewriter default
+\font_default_family default
+\use_non_tex_fonts false
+\font_sc false
+\font_osf false
+\font_sf_scale 100
+\font_tt_scale 100
+
+\graphics default
+\default_output_format default
+\output_sync 0
+\bibtex_command default
+\index_command default
+\paperfontsize default
+\use_hyperref false
+\papersize default
+\use_geometry false
+\use_amsmath 1
+\use_esint 1
+\use_mhchem 1
+\use_mathdots 1
+\cite_engine basic
+\use_bibtopic false
+\use_indices false
+\paperorientation portrait
+\suppress_date false
+\use_refstyle 1
+\index Index
+\shortcut idx
+\color #008000
+\end_index
+\secnumdepth 3
+\tocdepth 3
+\paragraph_separation indent
+\paragraph_indentation default
+\quotes_language english
+\papercolumns 1
+\papersides 1
+\paperpagestyle default
+\tracking_changes false
+\output_changes false
+\html_math_output 0
+\html_css_as_file 0
+\html_be_strict false
+\end_header
+
+\begin_body
+
+\begin_layout Title
+
+\noun on
+TuttleOFX Host - A nodal image library
+\end_layout
+
+\begin_layout Part
+Presentation
+\end_layout
+
+\begin_layout Standard
+Tuttle host is a high level image processing library.
+ You have to create a graph, create nodes, connect them and then execute
+ the teminals nodes.
+\end_layout
+
+\begin_layout Standard
+The library tries to optimize your graph using:
+\end_layout
+
+\begin_layout Itemize
+memory pool
+\end_layout
+
+\begin_layout Itemize
+thread management
+\end_layout
+
+\begin_layout Itemize
+tile rendering
+\end_layout
+
+\begin_layout Itemize
+multiple bit depth support
+\end_layout
+
+\begin_layout Part
+Steps
+\end_layout
+
+\begin_layout Itemize
+Tuttle host includes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+#include <tuttle/host/Graph.hpp>
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Load all plugins using a cache system:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+namespace ttl = tuttle::host;
+\end_layout
+
+\begin_layout Plain Layout
+
+ttl::Core::instance().preload();
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Create the graph:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ttl::Graph g;
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Create some new nodes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+ttl::Graph::Node& read = g.createNode( "tuttle.pngreader" );
+\end_layout
+
+\begin_layout Plain Layout
+
+ttl::Graph::Node& blur = g.createNode( "tuttle.blur" );
+\end_layout
+
+\begin_layout Plain Layout
+
+ttl::Graph::Node& write = g.createNode( "tuttle.pngwriter" );
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Set parameters:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+read.getParam( "filename" ).setValue( "data/input.####.png" );
+\end_layout
+
+\begin_layout Plain Layout
+
+write.getParam( "filename" ).setValue( "data/output.####.png" );
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+blur.getParam( "border" ).setValue( "Padded" );
+\end_layout
+
+\begin_layout Plain Layout
+
+blur.getParam( "size" ).setValue( 1.0, 1.0 );
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Connect nodes:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+g.connect( read, blur );
+\end_layout
+
+\begin_layout Plain Layout
+
+g.connect( blur, write );
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Launch the process, from frame 2 to frame 5 and keep the last node output
+ buffer in memory:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+memory::MemoryCache res = g.compute( write, 2, 5 );
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Itemize
+Read the result:
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+memory::CACHE_ELEMENT imgRes = res0.get( bitdepth2.getName(), 0 );
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+// imgRes->getROD() //< acces to image Region Of Definition
+\end_layout
+
+\begin_layout Plain Layout
+
+// imgRes->getBounds() //< acces to real image bounds
+\end_layout
+
+\begin_layout Plain Layout
+
+boost::gil::rgba32f_view_t imgResView = imgRes->getGilView<boost::gil::rgba32f_v
+iew_t>(); //< get a gil view on this image buffer
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Part
+Example
+\end_layout
+
+\begin_layout Standard
+You can see some examples in 
+\begin_inset Quotes eld
+\end_inset
+
+applications/example
+\begin_inset Quotes erd
+\end_inset
+
+.
+\end_layout
+
+\begin_layout Part
+Python
+\end_layout
+
+\begin_layout Standard
+\begin_inset listings
+inline false
+status open
+
+\begin_layout Plain Layout
+
+from pyTuttle import tuttle
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+tuttle.Core.instance().preload()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+g = tuttle.Graph()
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+read = g.createNode( "tuttle.pngreader" )
+\end_layout
+
+\begin_layout Plain Layout
+
+blur = g.createNode( "tuttle.blur" )
+\end_layout
+
+\begin_layout Plain Layout
+
+write = g.createNode( "tuttle.jpegwriter" )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+read.getParam( "filename" ).setValue( "data/input-###.png" );
+\end_layout
+
+\begin_layout Plain Layout
+
+write.getParam( "filename" ).setValue( "data/output.####.jpg" );
+\end_layout
+
+\begin_layout Plain Layout
+
+write.getParam( "premult" ).setValue( False );
+\end_layout
+
+\begin_layout Plain Layout
+
+blur.getParam( "border" ).setValue( "Padded" );
+\end_layout
+
+\begin_layout Plain Layout
+
+blur.getParam( "size" ).setValue( 5.0, 1.0 );
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+g.connect( [read,blur,write] )
+\end_layout
+
+\begin_layout Plain Layout
+
+\end_layout
+
+\begin_layout Plain Layout
+
+g.compute( write, 3, 5 )
+\end_layout
+
+\end_inset
+
+
+\end_layout
+
+\end_body
+\end_document
